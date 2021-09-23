@@ -9,3 +9,5 @@ deploy:
   api_key:
     secure: $HEROKU_TOKEN
   app: "adinh-book-demo-store"
+  on:
+    all_branches: true
