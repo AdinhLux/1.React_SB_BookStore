@@ -1,3 +1,11 @@
 language: java
 jdk:
   - openjdk17
+
+# Config to deploy our app to Heroku (you must generate token from Heroku CLI and copy paste it to Travis website)
+# 'adinh-book-demo-store' is the name of th app defined on Heroku website
+deploy:
+  provider: heroku
+  api_key:
+    secure: $HEROKU_TOKEN
+  app: "adinh-book-demo-store"
