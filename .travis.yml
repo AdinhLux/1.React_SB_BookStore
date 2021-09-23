@@ -6,6 +6,7 @@ jdk:
 # 'adinh-book-demo-store' is the name of th app defined on Heroku website
 deploy:
   provider: heroku
-  api_key:
-    secure: $HEROKU_TOKEN
+  api_key: $HEROKU_TOKEN
   app: "adinh-book-demo-store"
+  on:
+    all_branches: true
