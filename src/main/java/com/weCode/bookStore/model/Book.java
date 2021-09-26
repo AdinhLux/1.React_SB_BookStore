@@ -1,13 +1,22 @@
 package com.weCode.bookStore.model;
 
 import com.sun.istack.NotNull;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
  * Entity : Represents the DB table
  */
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+@Builder
+@AllArgsConstructor
 @Entity
 public class Book {
 
@@ -41,4 +50,17 @@ public class Book {
     @Column
     @NotNull
     private int releaseYear;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Book book = (Book) o;
+        return Objects.equals(id, book.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return 0;
+    }
 }

@@ -33,6 +33,15 @@ dependencies {
 
     // Flyway is an open-source database migration tool. I
     implementation 'org.flywaydb:flyway-core:6.2.0'
+
+    // For Unit test between a Service layer and a Repository layer : each request from SL will be intercepted by a Mocking Repository interface
+    testCompileOnly 'org.mockito:mockito-core'
+
+    // Mapper to perform Entity-DTO conversion
+    implementation 'org.modelmapper:modelmapper:2.3.0'
+
+    // A core module to provide assertions for JDK types (String, Iterable, Stream, Path, File, Map…)
+    testCompileOnly 'org.assertj:assertj-core'
 }
 
 test {
