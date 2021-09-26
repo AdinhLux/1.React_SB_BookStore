@@ -29,6 +29,9 @@ dependencies {
     runtimeOnly 'com.h2database:h2:1.4.200'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.4'
+
+    // Flyway is an open-source database migration tool. I
+    implementation 'org.flywaydb:flyway-core:6.2.0'
 }
 
 test {
