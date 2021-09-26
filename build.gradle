@@ -33,6 +33,9 @@ dependencies {
 
     // Flyway is an open-source database migration tool. I
     implementation 'org.flywaydb:flyway-core:6.2.0'
+
+    // For Unit test between a Service layer and a Repository layer : each request from SL will be intercepted by a Mocking Repository interface
+    testCompileOnly 'org.mockito:mockito-core'
 }
 
 test {
