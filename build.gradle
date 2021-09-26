@@ -39,6 +39,9 @@ dependencies {
 
     // Mapper to perform Entity-DTO conversion
     implementation 'org.modelmapper:modelmapper:2.3.0'
+
+    //
+    testCompileOnly 'org.assertj:assertj-core'
 }
 
 test {

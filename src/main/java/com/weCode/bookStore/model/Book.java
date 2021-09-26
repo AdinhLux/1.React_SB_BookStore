@@ -17,7 +17,6 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
 @Entity
 public class Book {
 

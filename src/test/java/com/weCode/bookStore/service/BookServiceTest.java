@@ -10,12 +10,15 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
-//
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+//
 import static org.mockito.Mockito.when;
+
+//
+import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
 public class BookServiceTest {
@@ -44,7 +47,12 @@ public class BookServiceTest {
 
         // Call the Book service
         List<BookDto> bookDtos = bookService.getBooks();
-
+        assertThat(1).isEqualTo(bookDtos.size());
+        assertThat(bookDtos.get(0))
+                .isNotNull()
+                .hasFieldOrPropertyWithValue("title", "Test Dto title")
+                .hasFieldOrPropertyWithValue("description", "Test Dto description")
+                .hasFieldOrPropertyWithValue("releaseYear", 2021);
     }
 
     private Book getBook() {
