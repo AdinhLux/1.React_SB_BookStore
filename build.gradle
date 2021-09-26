@@ -40,7 +40,7 @@ dependencies {
     // Mapper to perform Entity-DTO conversion
     implementation 'org.modelmapper:modelmapper:2.3.0'
 
-    //
+    // A core module to provide assertions for JDK types (String, Iterable, Stream, Path, File, Map…)
     testCompileOnly 'org.assertj:assertj-core'
 }
 
