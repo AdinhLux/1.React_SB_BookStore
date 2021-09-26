@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 /*
  * @Data will create getter - setter
  * @Builder enables the Builder design pattern (which will create a constructor accepting all fields without declaring one)
@@ -16,5 +18,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookDto {
+    private UUID id;
     private String title;
+    private String description;
+    private int releaseYear;
 }
