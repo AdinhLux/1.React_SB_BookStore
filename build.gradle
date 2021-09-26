@@ -36,6 +36,9 @@ dependencies {
 
     // For Unit test between a Service layer and a Repository layer : each request from SL will be intercepted by a Mocking Repository interface
     testCompileOnly 'org.mockito:mockito-core'
+
+    // Mapper to perform Entity-DTO conversion
+    implementation 'org.modelmapper:modelmapper:2.3.0'
 }
 
 test {
