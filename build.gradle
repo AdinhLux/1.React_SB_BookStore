@@ -42,6 +42,9 @@ dependencies {
 
     // A core module to provide assertions for JDK types (String, Iterable, Stream, Path, File, Map…)
     testCompileOnly 'org.assertj:assertj-core:3.20.2'
+
+    // PostgreSQL for PROD environment
+    implementation 'org.postgresql:postgresql'
 }
 
 test {

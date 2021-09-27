@@ -6,9 +6,10 @@ server:
 spring:
   datasource:
     # All values are defined on Heroku server (adinh-book-demo-store -> Config Vars)
-    # Also be sure to have created a "new app", only used to add a Heroku Posgres add-on where we can see the DB credentials (adinh-book-store-prod-db)
+    # Also be sure to have created a "new app", only used to add a Heroku Postgres add-on where we can see the DB credentials (adinh-book-store-prod-db)
     #
-    # You also need to copy - paste all of your Config Vars into IntelliJ (Edit configurations -> Environment variables)
+    # You also need to copy - paste all of your Config Vars into IntelliJ (Edit configurations -> Environment variables). Replace 'jdbc:sql:' by 'jdbc:postgresql:'
+    # In localhost:8080 -> H2 console, select Generic PostgreSQL to insert data
     url: ${databaseUrl}
     username: ${usernameDB}
     password: ${passwordDB}
