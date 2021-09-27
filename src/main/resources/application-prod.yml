@@ -1,0 +1,44 @@
+# Configure Spring Boot default port : Heroku $PORT or 8080
+server:
+  port: ${PORT:8080}
+
+# Database connection
+spring:
+  datasource:
+    # All values are defined on Heroku server (adinh-book-demo-store -> Config Vars)
+    # Also be sure to have created a "new app", only used to add a Heroku Posgres add-on where we can see the DB credentials (adinh-book-store-prod-db)
+    #
+    # You also need to copy - paste all of your Config Vars into IntelliJ (Edit configurations -> Environment variables)
+    url: ${databaseUrl}
+    username: ${usernameDB}
+    password: ${passwordDB}
+    hikari:
+      connection-test-query: SELECT 1
+
+  sql:
+    init:
+      platform: postgres
+
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      # validate – Hibernate only validates whether the tables and columns exist; otherwise, it throws an exception.
+      # https://www.baeldung.com/spring-boot-data-sql-and-schema-sql
+      ddl-auto: validate
+
+  # https://reflectoring.io/database-migration-spring-boot-flyway/
+  flyway:
+    # This will create the migration History table by which we will ensure that SQL script is executed or not
+    baseline-on-migrate: true
+    # For validating script
+    validate-on-migrate: true
+    # SQL script locations
+    locations: classpath:db/migration
+
+    # Flyway file name syntax
+    sql-migration-prefix: V
+    repeatable-sql-migration-prefix: R
+    sql-migration-separator: __
+    sql-migration-suffixes: .sql
