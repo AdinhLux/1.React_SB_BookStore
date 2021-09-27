@@ -32,16 +32,19 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.4'
 
     // Flyway is an open-source database migration tool. I
-    implementation 'org.flywaydb:flyway-core:6.2.0'
+    implementation 'org.flywaydb:flyway-core:7.14.1'
 
     // For Unit test between a Service layer and a Repository layer : each request from SL will be intercepted by a Mocking Repository interface
-    testCompileOnly 'org.mockito:mockito-core'
+    testCompileOnly 'org.mockito:mockito-core:3.12.4'
 
     // Mapper to perform Entity-DTO conversion
-    implementation 'org.modelmapper:modelmapper:2.3.0'
+    implementation 'org.modelmapper:modelmapper:2.4.4'
 
     // A core module to provide assertions for JDK types (String, Iterable, Stream, Path, File, Map…)
-    testCompileOnly 'org.assertj:assertj-core'
+    testCompileOnly 'org.assertj:assertj-core:3.20.2'
+
+    // PostgreSQL for PROD environment
+    implementation 'org.postgresql:postgresql'
 }
 
 test {
@@ -54,7 +57,7 @@ jacocoTestCoverageVerification {
             limit {
                 counter = 'LINE'
                 value = 'COVEREDRATIO'
-                minimum = 1.0 // 100%
+                minimum = 0.7 // 70%
             }
         }
     }
