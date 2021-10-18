@@ -40,7 +40,7 @@ public class BookRepositoryTest {
          */
         Long totalBookAccount = StreamSupport.stream(all.spliterator(), false).count();
         System.out.println("shouldAbleToFetchAllBooksInDB() totalBookAccount = " + totalBookAccount);
-        Assertions.assertEquals(totalBookAccount, 2);
+        Assertions.assertEquals(totalBookAccount, 18);
     }
 
     @Test
