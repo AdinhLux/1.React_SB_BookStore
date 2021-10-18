@@ -40,13 +40,20 @@ public class BookRepositoryTest {
          */
         Long totalBookAccount = StreamSupport.stream(all.spliterator(), false).count();
         System.out.println("shouldAbleToFetchAllBooksInDB() totalBookAccount = " + totalBookAccount);
-        Assertions.assertEquals(totalBookAccount, 2);
+        Assertions.assertEquals(totalBookAccount, 18);
     }
 
     @Test
     @Sql(scripts = {"classpath:insertInitialBookRecordForTest.sql"})
-    void shouldReturnOneBookWhenTitleIsTestTile() {
-        List<Book> testTitleBooks = bookRepository.findBooksByTitle("Test title");
+    void shouldReturnOneBookWhenTitleIsTestTitle() {
+        List<Book> testTitleBooks = bookRepository.findBooksByTitle("test title");
+        Assertions.assertEquals(testTitleBooks.size(), 1);
+    }
+
+    @Test
+    @Sql(scripts = {"classpath:insertInitialBookRecordForTest.sql"})
+    void shouldReturnOneBookWhenTitleIsTestTitleIgnoreCase() {
+        List<Book> testTitleBooks = bookRepository.findBooksByTitleIgnoreCase("Test Title");
         Assertions.assertEquals(testTitleBooks.size(), 1);
     }
 }

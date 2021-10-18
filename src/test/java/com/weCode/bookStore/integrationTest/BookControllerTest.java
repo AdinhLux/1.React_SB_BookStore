@@ -30,7 +30,7 @@ public class BookControllerTest {
     void shouldReturnBooksWhenBookApiCalled() {
         BookDto[] listOfBooks = testRestTemplate.getForObject("http://localhost:" + port + "/api/v1/books", BookDto[].class);
         assertThat(listOfBooks).isNotNull();
-        assertThat(listOfBooks.length).isEqualTo(2);
+        assertThat(listOfBooks.length).isEqualTo(18);
     }
 
     /*
@@ -43,6 +43,16 @@ public class BookControllerTest {
     void shouldReturnBooksWhenBookApiCalledSecondAttempt() {
         BookDto[] listOfBooks = testRestTemplate.getForObject("http://localhost:" + port + "/api/v1/books", BookDto[].class);
         assertThat(listOfBooks).isNotNull();
-        assertThat(listOfBooks.length).isEqualTo(2);
+        assertThat(listOfBooks.length).isEqualTo(18);
+    }
+
+    @Test
+    @Sql(scripts = {"classpath:insertInitialBookRecordForTest.sql"})
+    void shouldReturnOneBookWhenCalledWithTestTitle() {
+        // Let's try the insensitive case : 'test Title' instead of 'test title'
+        BookDto[] listOfBooks = testRestTemplate.getForObject("http://localhost:" + port + "/api/v1/books/test Title", BookDto[].class);
+
+        assertThat(listOfBooks).isNotNull();
+        assertThat(listOfBooks.length).isEqualTo(1);
     }
 }
