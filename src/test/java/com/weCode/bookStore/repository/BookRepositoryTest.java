@@ -45,8 +45,15 @@ public class BookRepositoryTest {
 
     @Test
     @Sql(scripts = {"classpath:insertInitialBookRecordForTest.sql"})
-    void shouldReturnOneBookWhenTitleIsTestTile() {
-        List<Book> testTitleBooks = bookRepository.findBooksByTitle("Test title");
+    void shouldReturnOneBookWhenTitleIsTestTitle() {
+        List<Book> testTitleBooks = bookRepository.findBooksByTitle("test title");
+        Assertions.assertEquals(testTitleBooks.size(), 1);
+    }
+
+    @Test
+    @Sql(scripts = {"classpath:insertInitialBookRecordForTest.sql"})
+    void shouldReturnOneBookWhenTitleIsTestTitleIgnoreCase() {
+        List<Book> testTitleBooks = bookRepository.findBooksByTitleIgnoreCase("Test Title");
         Assertions.assertEquals(testTitleBooks.size(), 1);
     }
 }
