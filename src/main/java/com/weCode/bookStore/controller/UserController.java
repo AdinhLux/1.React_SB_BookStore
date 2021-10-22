@@ -20,7 +20,7 @@ public class UserController {
 
     private final AuthenticationManager authenticationManager;
     private final UserDetailService userDetailService;
-    private JwtUtil jwtUtil;
+    private final JwtUtil jwtUtil;
 
     public UserController(AuthenticationManager authenticationManager, UserDetailService userDetailService, JwtUtil jwtUtil) {
         this.authenticationManager = authenticationManager;
@@ -39,6 +39,6 @@ public class UserController {
 
         UserDetails userDetails = userDetailService.loadUserByUsername(request.getEmail());
         String token = jwtUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new AuthenticationResponse((token)));
+        return ResponseEntity.ok(new AuthenticationResponse(("Bearer " + token)));
     }
 }

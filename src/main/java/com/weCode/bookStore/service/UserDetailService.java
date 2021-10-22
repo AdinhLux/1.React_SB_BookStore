@@ -15,7 +15,7 @@ public class UserDetailService implements UserDetailsService {
     /**
      * Password encryptor
      */
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     public UserDetailService(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
@@ -24,6 +24,6 @@ public class UserDetailService implements UserDetailsService {
     // Spring Security method to load User from DB
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return new User("Dummy User",passwordEncoder.encode("Dummy Password"), new ArrayList<>());
+        return new User("peter@gmail.com",passwordEncoder.encode("dummy password"), new ArrayList<>());
     }
 }
