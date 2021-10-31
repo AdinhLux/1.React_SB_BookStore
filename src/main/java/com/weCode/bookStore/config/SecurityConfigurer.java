@@ -12,6 +12,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 @EnableWebSecurity
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
@@ -47,6 +51,22 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
         // Disable csrf : https://creativegroundtech.com/what-is-cross-site-request-forgery-csrf/
         // Enable Login endpoint & any requests need to be authenticated
         http.csrf().disable()
+                .cors().configurationSource(request -> {
+                    // Enable support for CORS requests (otherwise may be blocked by Spring Security before reaching Spring MVC.)
+                    CorsConfiguration corsConfiguration = new CorsConfiguration();
+
+                    // Allow from all origins
+                    corsConfiguration.setAllowedOrigins((Collections.singletonList("*")));
+
+                    // Accept all requests
+                    corsConfiguration.setAllowedMethods(Arrays.asList(
+                            "GET", "POST", "PUT", "DELETE", "OPTIONS"
+                    ));
+
+                    // Allow all headers
+                    corsConfiguration.setAllowedHeaders(Collections.singletonList("*"));
+                    return corsConfiguration;
+                }).and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
