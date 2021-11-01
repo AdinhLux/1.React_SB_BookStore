@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -40,6 +41,13 @@ public class UserService {
     }
 
     public UserDto getUserByEmail(String email) {
-        return new UserDto();
+        User userByEmail = userRepository.findByEmail(email);
+
+        if (Objects.isNull(userByEmail)) {
+            throw new RuntimeException("User does not exist : " + email);
+        }
+
+        // If exists, convert to UserDto
+        return modelMapper.map(userByEmail, UserDto.class);
     }
 }
