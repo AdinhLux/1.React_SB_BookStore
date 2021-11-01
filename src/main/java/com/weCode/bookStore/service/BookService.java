@@ -39,4 +39,12 @@ public class BookService {
     private Function<Book, BookDto> convertBookModelToBookDto() {
         return book -> modelMapper.map(book, BookDto.class);
     }
+
+    public List<BookDto> getBooksByTitle(String bookTitle) {
+        List<Book> booksByTitle = bookRepository.findBooksByTitleIgnoreCase(bookTitle);
+
+        return booksByTitle.stream()
+                .map(convertBookModelToBookDto())
+                .collect(Collectors.toList());
+    }
 }

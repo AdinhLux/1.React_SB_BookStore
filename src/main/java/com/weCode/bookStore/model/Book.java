@@ -1,6 +1,6 @@
 package com.weCode.bookStore.model;
 
-import com.sun.istack.NotNull;
+import javax.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.Hibernate;
 
