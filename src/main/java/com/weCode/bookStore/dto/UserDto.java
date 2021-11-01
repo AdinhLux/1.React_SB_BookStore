@@ -23,5 +23,5 @@ public class UserDto {
     private String email;
 
     @NotNull(message = "No provided password")
-    private int password;
+    private String password;
 }

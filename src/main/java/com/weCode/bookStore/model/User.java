@@ -30,7 +30,7 @@ public class User {
 
     @Column
     @NotNull
-    private int password;
+    private String password;
 
     @Override
     public boolean equals(Object o) {
