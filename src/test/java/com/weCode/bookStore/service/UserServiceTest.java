@@ -14,7 +14,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.UUID;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -45,6 +47,31 @@ public class UserServiceTest {
 
         assertThat(uuid).isNotNull();
         assertThat(uuid).isEqualTo(id);
+    }
+
+    @Test
+    public void shouldReturnUserWhenEmailExists() {
+        UUID id = UUID.randomUUID();
+
+        // Mock UserRepository with any arguments
+        when(userRepository.findByEmail(anyString())).thenReturn(getUser(id));
+        when(modelMapper.map(any(), any())).thenReturn(getUserDto());
+
+        // Call service
+        UserDto userDto = userService.getUserByEmail("email");
+
+        assertThat(userDto).isNotNull();
+        assertThat(userDto.getName()).isEqualTo("username");
+    }
+
+    @Test
+    public void shouldThrowErrorWhenEmailNotExists() {
+        UUID id = UUID.randomUUID();
+
+        // Mock UserRepository with any arguments
+        when(userRepository.findByEmail(anyString())).thenThrow(new RuntimeException("error"));
+
+        assertThatThrownBy(() -> userService.getUserByEmail("email")).isInstanceOf(RuntimeException.class);
     }
 
     private UserDto getUserDto() {
