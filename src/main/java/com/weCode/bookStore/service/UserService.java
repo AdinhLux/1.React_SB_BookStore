@@ -1,6 +1,7 @@
 package com.weCode.bookStore.service;
 
 import com.weCode.bookStore.dto.UserDto;
+import com.weCode.bookStore.model.User;
 import com.weCode.bookStore.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,7 +27,16 @@ public class UserService {
     }
 
     public UUID addUser(UserDto userDto) {
-        return UUID.randomUUID();
+        User user = modelMapper.map(userDto, User.class);
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+
+        // In case of if a null value is present
+        user.setId(null);
+
+        // Save into DB and auto generate ID
+        User createdUser = userRepository.saveAndFlush(user);
+
+        return createdUser.getId();
     }
 
     public UserDto getUserByEmail(String email) {
